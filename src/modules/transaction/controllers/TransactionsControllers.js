@@ -7,10 +7,11 @@ class TransactionsController {
 
   async create(req, res) {
     const data = req.body;
-    
+    const idUser = req.headers.idUser
+
     const createTransactionService = new CreateTransactionService();
-    
-    const response = await createTransactionService.execute(data)
+
+    const response = await createTransactionService.execute({...data, idUser});
 
     return res.json(response)
 
@@ -18,10 +19,11 @@ class TransactionsController {
 
   async show(req, res) {
     const {type, limit=undefined, minValue=0, maxValue} = req.query;
- 
+    const idUser = req.headers.idUser
+
     const getTransactionsService = new GetTransactionsService();
-    
-    const response = await getTransactionsService.execute({type, limit, minValue, maxValue})
+
+    const response = await getTransactionsService.execute({type, limit, minValue, maxValue, idUser})
 
     return res.json(response)
 
@@ -32,7 +34,7 @@ class TransactionsController {
     const {status} = req.body;
 
     const updateStatusTransactionService = new UpdateStatusTransactionService();
-    
+
     const transaction = await updateStatusTransactionService.execute({id, received, status})
 
     return res.json(transaction);
@@ -43,7 +45,7 @@ class TransactionsController {
     const {id} = req.params;
 
     const deleteTransactionsService = new DeleteTransactionService();
-    
+
     await deleteTransactionsService.execute(id)
 
     return res.status(204).send();

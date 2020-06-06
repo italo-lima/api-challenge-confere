@@ -19,7 +19,7 @@ class CreateTransactionService {
     } else if(type === "credit" && installments != 1){
       throw new AppError("Credit must have a portion", 401)
 
-    } else if(type==='installment_credit' && (installments <2 || installments > 12)){
+    } else if(type==='installment_credit' && (installments <2 || installments > 12)) {
       throw new AppError("Number of invalid installments for installment credit", 401)
     }
 
@@ -44,6 +44,7 @@ class CreateTransactionService {
     }
 
     return transaction
+
   }
 }
 

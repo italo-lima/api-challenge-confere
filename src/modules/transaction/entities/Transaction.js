@@ -36,7 +36,11 @@ const TransactionSchema = new mongoose.Schema({
   received: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Received'
-  }]
+  }],
+  idUser: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
 },
 {
   timestamps: true

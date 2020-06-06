@@ -12,7 +12,8 @@ async function createDebit(transaction, dateReceived){
 
   transaction.received.push({_id: recevived._id})
   transaction.value = newValue.toFixed(2);
-
+  // console.log("transaction", transaction)
+  // console.log("received", recevived)
   await recevived.save();
   await transaction.save();
 }
@@ -29,6 +30,8 @@ async function createCredit(transaction, dateReceived){
   transaction.received.push({_id: recevived._id})
   transaction.value = newValue.toFixed(2);
 
+  // console.log("transaction", transaction)
+  // console.log("received", recevived)
   await recevived.save();
   await transaction.save();
 }
@@ -47,6 +50,8 @@ async function createInstallmentCredit(transaction, dateReceived, installments){
     transaction.received.push({_id: recevived._id})
     transaction.value = newValue.toFixed(2);
   }
+
+  // console.log("transaction", transaction)
 
   await transaction.save();
 }

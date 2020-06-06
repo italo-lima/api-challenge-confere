@@ -19,7 +19,6 @@ beforeEach(async () => {
 
 it('Enables user password encryption', async () => {
   const user = new User({name: "Ítalo", email: "italo@email.com", password: "123456"})
-
   const passwordHash = await generateHash(user.password)
   const compareHash = await comparePassword("123456", passwordHash)
 
