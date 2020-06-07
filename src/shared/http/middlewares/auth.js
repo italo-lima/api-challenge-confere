@@ -5,17 +5,18 @@ const AppError = require('../../../shared/errors/AppError')
 
 module.exports = async (req, res, next) => {
   const authHeader = req.headers.authorization
-  const [, token] = authHeader.split(' ')
-  
-  if (!token) {
+
+  if (!authHeader) {
     throw new AppError('Token not provider')
   }
-  
+
+  const [, token] = authHeader.split(' ')
+
   try {
   const decoded = await promisify(jwt.verify)(token, secret)
 
   req.headers.idUser = decoded.id
-  
+
   return next()
 
   } catch {

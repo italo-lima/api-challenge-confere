@@ -5,9 +5,9 @@ const {generateHash} = require('../utils/generateHash')
 class CreateUserService {
 
   async execute({name, email, password}) {
-    
+
     const checkUser = await User.findOne({email})
-    
+
     if(checkUser){
       throw new AppError("Email Already in use");
     }
@@ -16,7 +16,9 @@ class CreateUserService {
 
     const user = await User.create({name, email, password: passwordHash})
 
-    return user
+    const {_id} = user
+
+    return {name, email,_id}
   }
 }
 

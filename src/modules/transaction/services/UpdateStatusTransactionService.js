@@ -13,6 +13,10 @@ class UpdateStatusTransactionService {
       throw new AppError('Transaction not found', 404)
     }
 
+    if(transaction.type === "debit" && status != 'received'){
+      throw new AppError("Debit must only have received status", 401);
+    }
+
     const checkReceived = await Received.findById(received)
 
     checkReceived.status = status;

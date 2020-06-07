@@ -17,18 +17,18 @@ app.use(routes)
 app.use(errors())
 
 // tratativa de erros global (global exception handler)
-// app.use((err, req, res, _) => {
+app.use((err, req, res, _) => {
 
-//   if (err instanceof AppError) {
-//     return res
-//       .status(err.statusCode)
-//       .json({ status: 'Error', message: err.message });
-//   }
+  if (err instanceof AppError) {
+    return res
+      .status(err.statusCode)
+      .json({ status: 'Error', message: err.message });
+  }
 
-//   return res.status(500).json({
-//     status: '500',
-//     message: err,
-//   });
-// });
+  return res.status(500).json({
+    status: '500',
+    message: err,
+  });
+});
 
 module.exports = app

@@ -15,6 +15,7 @@ class GetTransactionsService {
     } else if(minValue){
       transactions = await Transaction.find({idUser, "value":{"$gte":minValue}}).limit(limitTransaction).populate('received')
     } else {
+      //adicionar idUser depois
       transactions = await Transaction.find({idUser}).limit(limitTransaction).populate('received');
     }
 
