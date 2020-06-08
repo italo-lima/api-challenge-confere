@@ -26,7 +26,7 @@
 ```
 #### :warning: A execução dos endpoints a seguir, necessitam de autenticação do usuário
 
-## User
+## Transaction
 
 `POST /transaction`: cria uma nova transação
 
@@ -48,7 +48,8 @@
 ```
 
 `GET /transaction`: Retorna as transações do usuário autenticado.
-### Permitido filtros:
+##### Permitido filtros:
+
 Possibilidades -> type, limit, minValue, maxValue
 
 
