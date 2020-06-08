@@ -23,9 +23,9 @@ class UpdateStatusTransactionService {
 
     await checkReceived.save();
 
-    const { _id, date_received} = checkReceived
+    const newTransaction = await Transaction.findOne({_id: id}).populate("received")
 
-    return {_id, date_received, status, idTransaction: transaction._id};
+    return newTransaction;
   }
 }
 

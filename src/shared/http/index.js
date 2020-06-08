@@ -6,10 +6,21 @@ const routes = require('../http/routes')
 const {errors} = require('celebrate')
 const cors = require('cors')
 
+const app = express()
+
+//
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
+//
+
 const database = require("../config/database")
 const AppError = require('../errors/AppError')
 
-const app = express()
+app.use((req, res, next) => {
+  req.io = io;
+
+  next();
+});
 
 app.use(express.json())
 app.use(cors())
@@ -31,4 +42,4 @@ app.use((err, req, res, _) => {
   });
 });
 
-module.exports = app
+module.exports = server

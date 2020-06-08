@@ -13,8 +13,9 @@ class TransactionsController {
 
     const response = await createTransactionService.execute({...data, idUser});
 
-    return res.json(response)
+    req.io.emit('create.transaction', response)
 
+    return res.json(response)
   }
 
   async show(req, res) {
@@ -33,12 +34,13 @@ class TransactionsController {
     const {id, received} = req.params;
     const {status} = req.body;
 
-    const updateStatusTransactionService = new UpdateStatusTransactionService();
+      const updateStatusTransactionService = new UpdateStatusTransactionService();
 
-    const transaction = await updateStatusTransactionService.execute({id, received, status})
+      const transaction = await updateStatusTransactionService.execute({id, received, status})
 
-    return res.json(transaction);
+      req.io.emit('update.transaction', transaction);
 
+      return res.json(transaction);
   }
 
   async destroy(req, res) {
